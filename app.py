@@ -8,7 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 st.title("🧬 BioTrial Finder - Prediction & Gap Analysis")
 
 # Data load karna
-df = pd.read_csv('final_cleaned_trials (2).xls')
+df = pd.read_csv('final_cleaned_trials.xls')
 
 # Target banana
 success_labels = ['COMPLETED']
