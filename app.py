@@ -16,7 +16,7 @@ fail_labels = ['TERMINATED', 'WITHDRAWN', 'SUSPENDED']
 df_pred = df[df['Study Status'].isin(success_labels + fail_labels)].copy()
 df_pred['target'] = df_pred['Study Status'].apply(lambda x: 1 if x in success_labels else 0)
 
-# Features ready karna
+# Features ready 
 features = ['primary_phase', 'Enrollment', 'disease_category', 'sponsor_type', 'duration_days']
 X = df_pred[features].copy()
 y = df_pred['target']
@@ -32,21 +32,21 @@ for col in ['primary_phase', 'disease_category', 'sponsor_type']:
     X[col] = le.fit_transform(X[col])
     encoders[col] = le
 
-# Model train karna
+# training Model
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 model = DecisionTreeClassifier(max_depth=5, random_state=42)
 model.fit(X_train, y_train)
 
-st.header("Naya Trial Check Karo")
+st.header("Check New Trail")
 
 # Website pe input boxes
-phase = st.selectbox("Phase chuno", df['primary_phase'].dropna().unique())
-enrollment = st.number_input("Enrollment (patients)", min_value=1, value=100)
-disease = st.selectbox("Disease Category chuno", df['disease_category'].dropna().unique())
-sponsor = st.selectbox("Sponsor Type chuno", df['sponsor_type'].dropna().unique())
-duration = st.number_input("Duration (days)", min_value=1, value=180)
+phase = st.selectbox("Select Phase", df['primary_phase'].dropna().unique())
+enrollment = st.number_input("No.of patients(Enrollment))", min_value=1, value=100)
+disease = st.selectbox(" Select Disease Category", df['disease_category'].dropna().unique())
+sponsor = st.selectbox("Select Sponsor Type", df['sponsor_type'].dropna().unique())
+duration = st.number_input("Trial Duration (days)", min_value=1, value=180)
 
-if st.button("Predict Karo"):
+if st.button("Predict"):
     new_trial = {
         'primary_phase': phase,
         'Enrollment': enrollment,
